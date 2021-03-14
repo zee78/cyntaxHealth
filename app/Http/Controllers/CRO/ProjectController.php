@@ -26,7 +26,7 @@ class ProjectController extends Controller
             'role' => 'true',
            ]);
         }
-        return \View::make('Cro/project-lists');
+        return \View::make('cro/project-lists');
     }
 
     /**
@@ -36,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return \View::make('Cro/project-create');
+        return \View::make('cro/project-create');
     }
 
     /**
@@ -95,7 +95,7 @@ class ProjectController extends Controller
         $getSingleData = CroProject::find($id);
         // return $getSingleData->id;
 
-        return \View::make('Cro/project-update' , compact('getSingleData'));
+        return \View::make('cro/project-update' , compact('getSingleData'));
     }
 
     /**

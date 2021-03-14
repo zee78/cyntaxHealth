@@ -93,5 +93,27 @@
 
 <!-- ********************** custom js file here *********************** -->
 <script src="{{ URL::asset('assets/CustomJs/Rback/Users/employees-list.js')}}"></script>
+<script>
+	function chat(id) {
+			var sender_id = "{{auth()->user()->id}}";
+			var receiver_id = id;
+	    // alert(sender_id)
 
+			var receiver_name = 'Nil';
+			var sender_name = 'Nil';
+			var receiver_image = 'Nil';
+			var sender_image = 'Nil';
+			jQuery.ajax({
+        type: 'POST',
+        url:'/api/friends',
+        
+        data:{sender_id:sender_id, receiver_id:receiver_id, receiver_name:receiver_name, sender_name:sender_name, receiver_image:receiver_image, sender_image:sender_image},
+        xhrFields: {withCredentials: true},
+        success:function(data){
+        	console.log(data);
+        	window.location = "/inbox/";
+        }
+      });
+	}
+</script>
 @endsection

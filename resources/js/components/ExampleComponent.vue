@@ -27,7 +27,7 @@
                                 <div class="hexagon-image-30-32" data-src="'/img/profileimage/'+friends.receiver_image"><img :src="'/img/profileimage/'+friends.receiver_image"></div> 
                               </template> -->
                               <template>
-                                <div class="hexagon-image-30-32" data-src="'assets/img/user.png'"><img :src="'assets/img/user.png'"></div>
+                                <div class="hexagon-image-30-32" data-src="'/assets/img/user.png'"><img :src="'/assets/img/user.png'"></div>
                               </template>
                             </div>
                             <div class="user-avatar-progress">
@@ -56,7 +56,7 @@
                                 <div class="hexagon-image-30-32" data-src="'/img/profileimage/'+friends.sender_image"><img :src="'/img/profileimage/'+friends.sender_image"></div>
                               </template> -->
                               <template>
-                                <div class="hexagon-image-30-32" data-src="'assets/img/user.png'"><img :src="'assets/img/user.png'"></div>
+                                <div class="hexagon-image-30-32" data-src="'/assets/img/user.png'"><img :src="'/assets/img/user.png'"></div>
                               </template>
                             </div>
                             <div class="user-avatar-progress">
@@ -79,10 +79,10 @@
                       </template>
                       <p class="user-status-title mt-2">
                         <template v-if="friends.sender_id == userdata.id">
-                          <span class="bold">{{friends.receiver_name}}</span>
+                          <span class="bold">{{friends.receiver_info.first_name}} {{friends.receiver_info.last_name}}</span>
                         </template>
                         <template v-else>
-                          <span class="bold">{{friends.sender_name}}</span>
+                          <span class="bold">{{friends.sender_info.first_name}} {{friends.sender_info.last_name}}</span>
                         </template>
                       </p>
                       <!-- <p class="user-status-text">Great! Then we'll meet with them at the party...</p> -->
@@ -95,7 +95,7 @@
             </div>
             <!-- /CHAT WIDGET MESSAGES -->
             <!-- CHAT WIDGET FORM -->
-            <form class="chat-widget-form">
+            <!-- <form class="chat-widget-form">
               <div class="interactive-input small">
                 <input type="text" id="chat-widget-search-2" name="chat_widget_search_2" placeholder="Search Messages...">
                 <div class="interactive-input-icon-wrap">
@@ -109,7 +109,7 @@
                   </svg>
                 </div>
               </div>
-            </form>
+            </form> -->
             <!-- /CHAT WIDGET FORM -->
           </div>
           <!-- /CHAT WIDGET -->
@@ -117,7 +117,7 @@
           <!-- CHAT WIDGET -->
           <div class="chat-widget message-body">
             <center id="selectConversation" class="mt-5 pt-5 mt-sm-5 pt-sm-5" >
-              <img src="http://203.99.61.173/demos/gigtodo35/images/chat.png" width="180" alt="">
+              <img src="/assets/img/chat.png" width="180" alt="">
               <h3 class="mt-3 empty-heading" style="font-weight:410;">Select a Conversation</h3>
               <p class="lead">Try selecting a conversation or searching for someone specific.</p>
             </center>
@@ -146,7 +146,7 @@
                           <div class="hexagon-image-30-32" data-src="'/img/profileimage/'+friendImage"><img :src="'/img/profileimage/'+friendImage"></div>
                         </template> -->
                         <template>
-                        <div class="hexagon-image-30-32" data-src="'assets/img/user.png'"><img :src="'assets/img/user.png'"></div>
+                        <div class="hexagon-image-30-32" data-src="'/assets/img/user.png'"><img :src="'/assets/img/user.png'"></div>
                         </template>
                       </div>
                       <div class="user-avatar-progress">
@@ -166,7 +166,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="user-status-title"><span class="bold">{{friendName}}</span></p>
+                  <p class="user-status-title pt-2"><span class="bold">{{friendName}}</span></p>
                   <!-- <p class="user-status-tag online">Online</p> -->
                 </div>
               </div>
@@ -181,7 +181,7 @@
                     </div>
                     
                     <a :href="'/chat_images/'+chat.file" download class="d-block mt-2 ml-1"  style="color: #ff0707;">
-                    <i class="fa fa-download"></i> {{chat.file}}
+                    <i class="fas fa-download"></i> {{chat.file}}
                     </a>
                     </template>
                   <p class="chat-widget-speaker-timestamp">{{istoday(chat.created_at)}}</p>
@@ -191,10 +191,10 @@
                     <div class="user-avatar tiny no-border">
                       <div class="user-avatar-content">
                         <template v-if="friendImage != ''">
-                          <div class="hexagon-image-24-26" data-src="'/img/profileimage/'+friendImage"><img :src="'/img/profileimage/'+friendImage"></div>
+                          <div class="hexagon-image-24-26" data-src="/assets/img/user.png"><img :src="'/assets/img/user.png'"></div>
                         </template>
                         <template v-else>
-                        <div class="hexagon-image-24-26" data-src="'/img/user.png'"><img :src="'/img/user.png'"></div>
+                        <div class="hexagon-image-24-26" data-src="'/assets/img/user.png'"><img :src="'/assets/img/user.png'"></div>
                         </template>
                       </div>
                     </div>
@@ -206,7 +206,7 @@
                     </div>
                     
                     <a :href="'/chat_images/'+chat.file" download class="d-block mt-2 ml-1"  style="color: #ff0707;">
-                    <i class="fa fa-download"></i> {{chat.file}}
+                    <i class="fas fa-download"></i> {{chat.file}}
                     </a>
                     </template>
                   <p class="chat-widget-speaker-timestamp">{{istoday(chat.created_at)}}</p>
@@ -225,7 +225,7 @@
                     <input type="hidden" name="receiver_id" v-model="receiver_id">
                     <input type="hidden" name="receiver_name" v-model="receiver_name" >
                     <div class="interactive-input small">
-                      <input type="text" id="send_message" v-model="message" placeholder="Write a message...">
+                      <input type="text" id="send_message" v-model="message" placeholder="Write a message..." @keyup.enter="sendMessage()">
                       <emoji-picker @emoji="append" :search="search">
                         <div
                           class="emoji-invoker"
@@ -263,9 +263,10 @@
                         <div class="interactive-input-icon-wrap actionable">
                           <input type="file" ref="msg_file" id="file" hidden="" />
                           <div class="tooltip-wrap text-tooltip-tft" data-title="Send Photo">
-                            <svg class="interactive-input-icon icon-camera">
+                            <!-- <svg class="interactive-input-icon icon-camera">
                               <use xlink:href="#svg-camera"></use>
-                            </svg>
+                            </svg> -->
+                            <i class="fas fa-camera fa-2x" aria-hidden="true"></i>
                           </div>
                         </div>
                       </label>
@@ -278,9 +279,10 @@
                   </div>
                   <div class="form-item auto-width">
                     <button class="button primary padded send-message" @click="sendMessage" id="send-msg">
-                      <svg class="button-icon no-space icon-send-message">
+                      <!-- <svg class="button-icon no-space icon-send-message">
                         <use xlink:href="#svg-send-message"></use>
-                      </svg>
+                      </svg> -->
+                      <i class="fas fa-paper-plane"></i>
                     </button>
                   </div>
                 </div>
@@ -375,7 +377,7 @@
               return moment(date).calendar();
             },
             friendlist: function(){
-              axios.get('http://localhost:8000/api/friendsList/'+this.userr)
+              axios.get('hhttp://cms.cyntaxhealthprojects.com/api/friendsList/'+this.userr)
                .then(responce => {
                  console.log(responce.data);
                this.friendList = responce.data;
@@ -399,18 +401,18 @@
               console.log(this.singleChatUser);
               if(this.singleChatUser.sender_id == this.userr){
                 this.userImage=this.singleChatUser.sender_image;
-                this.friendName=this.singleChatUser.receiver_name;
+                this.friendName=this.singleChatUser.receiver_info.first_name +' '+ this.singleChatUser.receiver_info.last_name;
                 this.friendId=this.singleChatUser.receiver_id;
                 this.friendImage=this.singleChatUser.receiver_image;
               //console.log(this.friendImage);
               }else{
-                    this.friendName=this.singleChatUser.sender_name;
+                    this.friendName=this.singleChatUser.sender_info.first_name +' '+ this.singleChatUser.sender_info.last_name;
                     this.friendId=this.singleChatUser.sender_id;
                     this.friendImage=this.singleChatUser.sender_image;
                     this.userImage=this.singleChatUser.receiver_image;
                     //console.log(this.friendImage);
               }
-              axios.post('http://localhost:8000/api/singleChat',{'sender_id':single.sender_id,'receiver_id':single.receiver_id})
+              axios.post('http://cms.cyntaxhealthprojects.com/api/singleChat',{'sender_id':single.sender_id,'receiver_id':single.receiver_id})
                .then(responce => {
                 console.log(responce.data);
 
@@ -462,7 +464,7 @@
               // console.log(obj);
               // socket.emit('message', obj);
               
-                  axios.post('http://localhost:8000/api/send-message',meetingformDatas,config)
+                  axios.post('http://cms.cyntaxhealthprojects.com/api/send-message',meetingformDatas,config)
                    .then(responce => {
                     this.singleChate.push(obj);
                     var height = 0;

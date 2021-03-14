@@ -2293,6 +2293,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
  // import VEmojiPicker from 'v-emoji-picker';
 
 
@@ -2370,7 +2372,7 @@ Vue.use(vue_emoji_picker__WEBPACK_IMPORTED_MODULE_1___default.a);
     friendlist: function friendlist() {
       var _this = this;
 
-      axios.get('http://localhost:8000/api/friendsList/' + this.userr).then(function (responce) {
+      axios.get('hhttp://cms.cyntaxhealthprojects.com/api/friendsList/' + this.userr).then(function (responce) {
         console.log(responce.data);
         _this.friendList = responce.data;
         console.log(_this.friendList);
@@ -2396,17 +2398,17 @@ Vue.use(vue_emoji_picker__WEBPACK_IMPORTED_MODULE_1___default.a);
 
       if (this.singleChatUser.sender_id == this.userr) {
         this.userImage = this.singleChatUser.sender_image;
-        this.friendName = this.singleChatUser.receiver_name;
+        this.friendName = this.singleChatUser.receiver_info.first_name + ' ' + this.singleChatUser.receiver_info.last_name;
         this.friendId = this.singleChatUser.receiver_id;
         this.friendImage = this.singleChatUser.receiver_image; //console.log(this.friendImage);
       } else {
-        this.friendName = this.singleChatUser.sender_name;
+        this.friendName = this.singleChatUser.sender_info.first_name + ' ' + this.singleChatUser.sender_info.last_name;
         this.friendId = this.singleChatUser.sender_id;
         this.friendImage = this.singleChatUser.sender_image;
         this.userImage = this.singleChatUser.receiver_image; //console.log(this.friendImage);
       }
 
-      axios.post('http://localhost:8000/api/singleChat', {
+      axios.post('http://cms.cyntaxhealthprojects.com/api/singleChat', {
         'sender_id': single.sender_id,
         'receiver_id': single.receiver_id
       }).then(function (responce) {
@@ -2456,7 +2458,7 @@ Vue.use(vue_emoji_picker__WEBPACK_IMPORTED_MODULE_1___default.a);
       // console.log(obj);
       // socket.emit('message', obj);
 
-      axios.post('http://localhost:8000/api/send-message', meetingformDatas, config).then(function (responce) {
+      axios.post('http://cms.cyntaxhealthprojects.com/api/send-message', meetingformDatas, config).then(function (responce) {
         _this3.singleChate.push(obj);
 
         var height = 0;
@@ -68989,14 +68991,14 @@ var render = function() {
                                                           "hexagon-image-30-32",
                                                         attrs: {
                                                           "data-src":
-                                                            "'assets/img/user.png'"
+                                                            "'/assets/img/user.png'"
                                                         }
                                                       },
                                                       [
                                                         _c("img", {
                                                           attrs: {
                                                             src:
-                                                              "assets/img/user.png"
+                                                              "/assets/img/user.png"
                                                           }
                                                         })
                                                       ]
@@ -69043,14 +69045,14 @@ var render = function() {
                                                           "hexagon-image-30-32",
                                                         attrs: {
                                                           "data-src":
-                                                            "'assets/img/user.png'"
+                                                            "'/assets/img/user.png'"
                                                         }
                                                       },
                                                       [
                                                         _c("img", {
                                                           attrs: {
                                                             src:
-                                                              "assets/img/user.png"
+                                                              "/assets/img/user.png"
                                                           }
                                                         })
                                                       ]
@@ -69079,13 +69081,28 @@ var render = function() {
                                       ? [
                                           _c("span", { staticClass: "bold" }, [
                                             _vm._v(
-                                              _vm._s(friends.receiver_name)
+                                              _vm._s(
+                                                friends.receiver_info.first_name
+                                              ) +
+                                                " " +
+                                                _vm._s(
+                                                  friends.receiver_info
+                                                    .last_name
+                                                )
                                             )
                                           ])
                                         ]
                                       : [
                                           _c("span", { staticClass: "bold" }, [
-                                            _vm._v(_vm._s(friends.sender_name))
+                                            _vm._v(
+                                              _vm._s(
+                                                friends.sender_info.first_name
+                                              ) +
+                                                " " +
+                                                _vm._s(
+                                                  friends.sender_info.last_name
+                                                )
+                                            )
                                           ])
                                         ]
                                   ],
@@ -69110,46 +69127,7 @@ var render = function() {
                   ]
                 )
               ]
-            ),
-            _vm._v(" "),
-            _c("form", { staticClass: "chat-widget-form" }, [
-              _c("div", { staticClass: "interactive-input small" }, [
-                _c("input", {
-                  attrs: {
-                    type: "text",
-                    id: "chat-widget-search-2",
-                    name: "chat_widget_search_2",
-                    placeholder: "Search Messages..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "interactive-input-icon-wrap" }, [
-                  _c(
-                    "svg",
-                    {
-                      staticClass:
-                        "interactive-input-icon icon-magnifying-glass"
-                    },
-                    [
-                      _c("use", {
-                        attrs: { "xlink:href": "#svg-magnifying-glass" }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "interactive-input-action" }, [
-                  _c(
-                    "svg",
-                    {
-                      staticClass:
-                        "interactive-input-action-icon icon-cross-thin"
-                    },
-                    [_c("use", { attrs: { "xlink:href": "#svg-cross-thin" } })]
-                  )
-                ])
-              ])
-            ])
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -69165,8 +69143,7 @@ var render = function() {
                 [
                   _c("img", {
                     attrs: {
-                      src:
-                        "http://203.99.61.173/demos/gigtodo35/images/chat.png",
+                      src: "/assets/img/chat.png",
                       width: "180",
                       alt: ""
                     }
@@ -69217,12 +69194,12 @@ var render = function() {
                                     {
                                       staticClass: "hexagon-image-30-32",
                                       attrs: {
-                                        "data-src": "'assets/img/user.png'"
+                                        "data-src": "'/assets/img/user.png'"
                                       }
                                     },
                                     [
                                       _c("img", {
-                                        attrs: { src: "assets/img/user.png" }
+                                        attrs: { src: "/assets/img/user.png" }
                                       })
                                     ]
                                   )
@@ -69240,7 +69217,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("p", { staticClass: "user-status-title" }, [
+                      _c("p", { staticClass: "user-status-title pt-2" }, [
                         _c("span", { staticClass: "bold" }, [
                           _vm._v(_vm._s(_vm.friendName))
                         ])
@@ -69288,7 +69265,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fa fa-download"
+                                          staticClass: "fas fa-download"
                                         }),
                                         _vm._v(
                                           " " +
@@ -69337,15 +69314,14 @@ var render = function() {
                                                       "hexagon-image-24-26",
                                                     attrs: {
                                                       "data-src":
-                                                        "'/img/profileimage/'+friendImage"
+                                                        "/assets/img/user.png"
                                                     }
                                                   },
                                                   [
                                                     _c("img", {
                                                       attrs: {
                                                         src:
-                                                          "/img/profileimage/" +
-                                                          _vm.friendImage
+                                                          "/assets/img/user.png"
                                                       }
                                                     })
                                                   ]
@@ -69359,13 +69335,14 @@ var render = function() {
                                                       "hexagon-image-24-26",
                                                     attrs: {
                                                       "data-src":
-                                                        "'/img/user.png'"
+                                                        "'/assets/img/user.png'"
                                                     }
                                                   },
                                                   [
                                                     _c("img", {
                                                       attrs: {
-                                                        src: "/img/user.png"
+                                                        src:
+                                                          "/assets/img/user.png"
                                                       }
                                                     })
                                                   ]
@@ -69410,7 +69387,7 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "fa fa-download"
+                                          staticClass: "fas fa-download"
                                         }),
                                         _vm._v(
                                           " " +
@@ -69522,6 +69499,21 @@ var render = function() {
                               },
                               domProps: { value: _vm.message },
                               on: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.sendMessage()
+                                },
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
@@ -69716,30 +69708,7 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "tooltip-wrap text-tooltip-tft",
-                                        attrs: { "data-title": "Send Photo" }
-                                      },
-                                      [
-                                        _c(
-                                          "svg",
-                                          {
-                                            staticClass:
-                                              "interactive-input-icon icon-camera"
-                                          },
-                                          [
-                                            _c("use", {
-                                              attrs: {
-                                                "xlink:href": "#svg-camera"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
+                                    _vm._m(11)
                                   ]
                                 )
                               ]
@@ -69776,20 +69745,7 @@ var render = function() {
                             attrs: { id: "send-msg" },
                             on: { click: _vm.sendMessage }
                           },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass:
-                                  "button-icon no-space icon-send-message"
-                              },
-                              [
-                                _c("use", {
-                                  attrs: { "xlink:href": "#svg-send-message" }
-                                })
-                              ]
-                            )
-                          ]
+                          [_c("i", { staticClass: "fas fa-paper-plane" })]
                         )
                       ])
                     ])
@@ -69933,6 +69889,24 @@ var staticRenderFns = [
         _c("div", { staticClass: "hexagon-dark-16-18" })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tooltip-wrap text-tooltip-tft",
+        attrs: { "data-title": "Send Photo" }
+      },
+      [
+        _c("i", {
+          staticClass: "fas fa-camera fa-2x",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -82372,8 +82346,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\cms\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\cms\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\cyntaxHealth\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\cyntaxHealth\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

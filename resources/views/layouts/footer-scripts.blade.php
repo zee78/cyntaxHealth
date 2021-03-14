@@ -10,6 +10,8 @@
 
 		<!-- Ionicons js-->
 		<script src="{{ URL::asset('assets/plugins/ionicons/ionicons.js') }}"></script>
+
+		<script src="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.js') }}"></script>
 		
 		<!-- Rating js-->
 		<script src="{{ URL::asset('assets/plugins/rating/jquery.rating-stars.js') }}"></script>

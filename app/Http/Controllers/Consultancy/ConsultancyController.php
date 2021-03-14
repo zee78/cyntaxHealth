@@ -14,7 +14,7 @@ class ConsultancyController extends Controller
      */
     public function index()
     {
-        return \View::make('Consultancies/consultancy-list');
+        return \View::make('consultancies/consultancy-list');
     }
 
     /**
@@ -24,7 +24,7 @@ class ConsultancyController extends Controller
      */
     public function create()
     {
-        return \View::make('Consultancies/consultancy-create');
+        return \View::make('consultancies/consultancy-create');
     }
 
     /**

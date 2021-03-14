@@ -9200,15 +9200,15 @@ a.button{
 }
 
 .chat-widget-wrap .chat-widget .chat-widget-messages {
-    height: 588px;
+    height: 470px;
 }
 
 .chat-widget-wrap .chat-widget .chat-widget-conversation {
-    height: 550px;
+    height: 460px;
 }
 
 .chat-widget-wrap .chat-widget:first-child {
-    width: 38.4389140271%;
+    width: 30%;
     border-right: 1px solid #eaeaf5;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
@@ -9219,7 +9219,7 @@ a.button{
 }
 
 .chat-widget-wrap .chat-widget:last-child {
-    width: 61.5610859729%;
+    width: 70%;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
 }
@@ -9240,6 +9240,7 @@ a.button{
 .chat-widget.static .chat-widget-messages .chat-widget-message {
     padding: 20px 28px 20px 24px;
     border-left: 4px solid transparent;
+    border-bottom: 1px solid #ddd;
 }
 
 .chat-widget.static .chat-widget-messages .chat-widget-message.active,

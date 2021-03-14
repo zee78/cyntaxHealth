@@ -111,7 +111,7 @@ class ChatController extends Controller
 
     public function friendsList(Request $request, $id){
 
-      $getfriends = ChatFriends::orWhere('sender_id',$id)->orWhere('receiver_id',$id)->with('user')->get();
+      $getfriends = ChatFriends::orWhere('sender_id',$id)->orWhere('receiver_id',$id)->with('senderInfo','receiverInfo')->get();
        // dd($getfriends);
       return $getfriends;
 

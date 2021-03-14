@@ -59,6 +59,3 @@ $(document).ready(()=>{
 });
 
 
-function chat(id) {
-    alert(id)
-}

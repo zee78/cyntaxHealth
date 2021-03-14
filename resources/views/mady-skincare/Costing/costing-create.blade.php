@@ -85,17 +85,17 @@
 							<div class="row">
 								<div class="col-lg-6 form-group">
 									<label class="form-label">Total Direct Cost: <span class="tx-danger">*</span></label>
-									<input class="form-control" name="total_direct_cost" placeholder="Total direct cost" required="" type="text">
+									<input class="form-control" name="total_direct_cost" id="direct_cost" placeholder="Total direct cost" required="" type="text">
 								</div>
 								<div class="col-lg-6 form-group">
 									<label class="form-label">Gst (18%): <span class="tx-danger">*</span></label>
-									<input class="form-control" name="gst" placeholder="Gst (18%)" required="" type="text">
+									<input class="form-control" name="gst" id="gst" placeholder="Gst (18%)" required="" type="text">
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-6 form-group">
 									<label class="form-label">Marketing Cost (26%): <span class="tx-danger">*</span></label>
-									<input class="form-control" name="marketing_cost" placeholder="Marketing cost (26%)" required="" type="text">
+									<input class="form-control" name="marketing_cost" id="mark_avg" placeholder="Marketing cost (26%)" required="" type="text">
 								</div>
 								<div class="col-lg-6 form-group">
 									<label class="form-label">Profit %age: <span class="tx-danger">*</span></label>
@@ -140,4 +140,14 @@
 <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <!-- ********************** custom js file here *********************** -->
 <script src="{{ URL::asset('assets/CustomJs/MadySkincare/Costing/costing-create.js')}}"></script>
+<script>
+  $('#direct_cost').keyup(function(){
+     var cost = $(this).val();
+     var avg_gst = 18/100 * cost;
+  //   alert(avg_gst);
+     $('#gst').val(avg_gst);
+     var avg_mark = 26/100 * cost;
+     $('#mark_avg').val(avg_mark);
+  });
+</script>
 @endsection

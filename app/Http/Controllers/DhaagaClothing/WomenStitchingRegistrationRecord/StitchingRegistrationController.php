@@ -17,7 +17,7 @@ class StitchingRegistrationController extends Controller
      */
     public function index()
     {
-        return \View::make('dhaaga-clothing.WomenStitchingRegistrationRecord.stitching-registrations-list');
+        return \View::make('dhaaga-clothing.womenStitchingRegistrationRecord.stitching-registrations-list');
         
     }
 
@@ -28,7 +28,7 @@ class StitchingRegistrationController extends Controller
      */
     public function create()
     {
-        return \View::make('dhaaga-clothing.WomenStitchingRegistrationRecord.stitching-registration-create');
+        return \View::make('dhaaga-clothing.womenStitchingRegistrationRecord.stitching-registration-create');
         
     }
 
