@@ -133,9 +133,19 @@ Route::group(['prefix' => 'dhaaga-clothings'], function () {
 	Route::get('/women-product-registration/datatable', 'DhaagaClothing\WomenPreparedProductsRegistrationRecord\PreparedProductsRegistrationController@datatable');
 	Route::resource('/women-product-registration', 'DhaagaClothing\WomenPreparedProductsRegistrationRecord\PreparedProductsRegistrationController');
 
-
+	Route::get('/costing/datatable', 'DhaagaClothing\costing\CostingController@datatable');
+	Route::resource('/costing', 'DhaagaClothing\costing\CostingController');
 
 });
+
+Route::group(['prefix' => 'dastarkhwan'], function () {
+
+	Route::get('/daily-expense-sheet/datatable', 'Dastarkhwan\DailyExpenseSheetControllerr@datatable');
+	Route::resource('/daily-expense-sheet', 'DhaagaClothing\DailyExpenseSheetControllerr');
+
+});
+
+
 
 // Chat
 Route::resource('/inbox' , 'Chat\ChatController');
