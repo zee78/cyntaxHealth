@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\PurchaseOrder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingPurchaseOrder;
+use App\Http\Requests\UpdateDhaagaClothingPurchaseOrder;
 // use App\Http\Requests\UpdateDhaagaClothingPurchaseOrder;
 use App\Models\DhaagaClothingOrder;
 // use App\Models\DhaagaClothingVendor;
@@ -89,7 +90,10 @@ class PurchaseOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+      $getSingleData = DhaagaClothingOrder::find($id);
+        // return $getSingleData->id;
+      // dd($getSingleData);
+      return \View::make('dhaaga-clothing.purchaseOrder.purchase-order-update' , compact('getSingleData'));
     }
 
     /**
@@ -99,9 +103,31 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingPurchaseOrder $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $findData = DhaagaClothingOrder::find($id);
+
+        $findData->dhaaga_clothing_order_id = IdGenerator::generate(['table' => 'dhaaga_clothing_orders', 'length' => 13, 'field' => 'dhaaga_clothing_order_id', 'prefix' => 'OrdNo-']);
+        $findData->dhaaga_clothing_vendor_id = $validatedData['vendor_name'];
+        $findData->order_type = $validatedData['vendor_type'];
+        $findData->order_items = $validatedData['order_items'];
+        $findData->order_placed_by = $validatedData['placed_by'];
+        $findData->order_date = $validatedData['date'];
+        $findData->cost = $validatedData['cost'];
+        $findData->order_procurement_by = $validatedData['procurement_person'];
+        $findData->order_receiving_date = $validatedData['receiving_date'];
+        $findData->order_status = Config::get('constants.dhaaga_order_status_pending');
+        $findData->status = '1';
+        $findData->created_by = Auth::id();
+
+
+        if ($findData->save()) {
+            return response()->json(['status'=>'true' , 'message' => 'Order data updated successfully'] , 200);
+        }else{
+             return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -112,7 +138,14 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingOrder::find($id);
+        if($deleteData->delete()){
+            return response()->json(['status'=>'true' , 'message' => 'purchase order data deleted successfully'] , 200);
+
+        }else{
+            return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+        }
     }
 
     // ******************* datatable ***************************

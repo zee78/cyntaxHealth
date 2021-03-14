@@ -51,7 +51,7 @@ $(document).ready(()=>{
             // console.log(row)
               return `
               <div class="glyph">
-                  <a href="/skincare/purchase-order/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
+                  <a href="/dhaaga-clothings/purchase-order/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
                   <a class="modal-effect" data-effect="effect-scale" data-toggle="modal" href="#" onclick="deleteTrndAnalysis('`+row.id+`')"> <i class="typcn typcn-trash"></i> </a>
               </div>
 
@@ -104,10 +104,10 @@ $(document).ready(()=>{
 
    // **************************** hide and display user data ***********************
 
-   if (typeof role === 'undefined') {
-        table.columns(11).visible(false);
-        table.columns(12).visible(false);
-   }
+   // if (typeof role === 'undefined') {
+   //      table.columns(11).visible(false);
+   //      table.columns(12).visible(false);
+   // }
 
 
    // *******************************************************************************
@@ -158,7 +158,7 @@ $(document).ready(()=>{
       console.log($purchaseId)
 
          $.ajax({
-          url: '/skincare/purchase-order/'+$purchaseId,
+          url: '/dhaaga-clothings/purchase-order/'+$purchaseId,
           type: 'DELETE',
           data: data,
           processData: false,

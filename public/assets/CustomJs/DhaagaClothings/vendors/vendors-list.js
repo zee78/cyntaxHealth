@@ -19,7 +19,7 @@ $(document).ready(()=>{
             // console.log(row)
               return `
               <div class="glyph">
-                  <a href="/skincare/vendors/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
+                  <a href="/dhaaga-clothings/vendors/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
                   <a class="modal-effect" data-effect="effect-scale" data-toggle="modal" href="#" onclick="deleteVendor('`+row.id+`')"> <i class="typcn typcn-trash"></i> </a>
               </div>
 
@@ -51,9 +51,9 @@ $(document).ready(()=>{
 
       });
       // **************************** hide and display user data ***********************
-        if (typeof role === 'undefined') {
-            table.columns(5).visible(false);
-        }
+        // if (typeof role === 'undefined') {
+        //     table.columns(5).visible(false);
+        // }
       // *******************************************************************************
 
     // ******************** ******************************* confirm delete ajax **********************
@@ -66,7 +66,7 @@ $(document).ready(()=>{
       console.log($venderId)
 
          $.ajax({
-          url: '/skincare/vendors/'+$venderId,
+          url: '/dhaaga-clothings/vendors/'+$venderId,
           type: 'DELETE',
           data: data,
           processData: false,
@@ -76,7 +76,7 @@ $(document).ready(()=>{
               if (response.status == 'true') {
 
                   $.notify(response.message , 'success'  );
-                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/skincare/vendors";
+                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/dhaaga-clothings/vendors";
 
               }else{
                   $.notify(response.message , 'error');

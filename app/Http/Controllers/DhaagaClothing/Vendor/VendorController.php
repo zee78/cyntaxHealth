@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingVendor;
+use App\Http\Requests\UpdateDhaagaClothingVendor;
 use App\Models\DhaagaClothingVendor;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use illuminate\Support\Facades\Auth;
@@ -87,7 +88,10 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        //
+      $getSingleData = DhaagaClothingVendor::find($id);
+        // return $getSingleData->id;
+
+        return \View::make('dhaaga-clothing.vendors.vendor-update' , compact('getSingleData'));
     }
 
     /**
@@ -97,9 +101,29 @@ class VendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingVendor $request, $id)
     {
-        //
+      $validatedData = $request->validated();
+
+      $findData = DhaagaClothingVendor::find($id);
+
+      $findData->dhaaga_clothing_vendor_id = IdGenerator::generate(['table' => 'dhaaga_clothing_vendors', 'length' => 13, 'field' => 'dhaaga_clothing_vendor_id', 'prefix' => 'VNDR-']);;
+      $findData->vendor_type = $validatedData['vendor_type'];
+      $findData->vendor_name = $validatedData['vendor_name'];
+      $findData->purchased_products = $validatedData['product_purchased'];
+
+      $findData->phoneNo = $validatedData['phoneNo'];
+      $findData->address = $validatedData['address'];
+
+      $findData->status = '1';
+      $findData->created_by = Auth::id();
+
+
+       if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'vendor data updated successfully'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     /**
@@ -110,7 +134,14 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingVendor::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'vendor data deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 
     public function datatable()

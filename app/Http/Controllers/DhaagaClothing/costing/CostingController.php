@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\costing;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingCosting;
+use App\Http\Requests\UpdateDhaagaClothingCosting;
 use App\Models\DhaagaClothingCosting;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,7 +83,10 @@ class CostingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $getSingleData = DhaagaClothingCosting::find($id);
+        // return $getSingleData->id;
+
+        return \View::make('dhaaga-clothing.costing.costing-update' , compact('getSingleData'));
     }
 
     /**
@@ -92,9 +96,29 @@ class CostingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingCosting $request, $id)
     {
-        //
+      $validatedData = $request->validated();
+
+      $findData = DhaagaClothingCosting::find($id);
+
+      $findData->code = $validatedData['code'];
+      $findData->type = $validatedData['type'];
+      $findData->marketing_cost = $validatedData['marketing_cost'];
+      $findData->profit_percentage = $validatedData['profit_percentage'];
+      $findData->profit_amount = $validatedData['profit_amount'];
+      $findData->gst = $validatedData['gst'];
+      $findData->total_direct_cost = $validatedData['total_direct_cost'];
+      $findData->market_retail_price = $validatedData['market_retail_price'];
+      $findData->status = '1';
+      $findData->created_by = Auth::id();
+
+
+      if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => 'costing data updated successfully'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     /**
@@ -105,7 +129,14 @@ class CostingController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingCosting::find($id);
+        if($deleteData->delete()){
+            return response()->json(['status'=>'true' , 'message' => 'costing data deleted successfully'] , 200);
+
+        }else{
+            return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+        }
     }
 
     public function datatable()

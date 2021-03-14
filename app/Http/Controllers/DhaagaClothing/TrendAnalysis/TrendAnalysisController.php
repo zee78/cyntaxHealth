@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\TrendAnalysis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingTrendAnalysis;
+use App\Http\Requests\UpdateDhaagaClothingTrendAnalysis;
 // use App\Http\Requests\UpdateDhaagaClothingTrendAnalysis;
 use App\Models\DhaagaClothingTrendAnalysis;
 use Illuminate\Support\Facades\Auth;
@@ -84,7 +85,10 @@ class TrendAnalysisController extends Controller
      */
     public function edit($id)
     {
-        //
+      $getSingleData = DhaagaClothingTrendAnalysis::find($id);
+        // return $getSingleData->id;
+
+      return \View::make('dhaaga-clothing.trendAnalysis.trend-analysis-update' , compact('getSingleData'));
     }
 
     /**
@@ -94,9 +98,26 @@ class TrendAnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingTrendAnalysis $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $findData = DhaagaClothingTrendAnalysis::find($id);
+
+        $findData->code = $validatedData['code'];
+        $findData->number_sold = $validatedData['number_sold'];
+        $findData->amount_received = $validatedData['amount_received'];
+        $findData->customer_feedback = $validatedData['customer_feedback'];
+
+        $findData->status = '1';
+        $findData->created_by = Auth::id();
+
+
+         if ($findData->save()) {
+            return response()->json(['status'=>'true' , 'message' => 'Trend Analysis data updated successfully'] , 200);
+        }else{
+             return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -107,7 +128,14 @@ class TrendAnalysisController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingTrendAnalysis::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'Trend Analysis data deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 
     // ******************* get all data ***************
