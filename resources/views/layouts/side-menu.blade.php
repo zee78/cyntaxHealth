@@ -83,11 +83,20 @@
 						<li class="nav-label">Dhaaga Clothing 	</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='vendors')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Vendors</span></a>
+							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='costing')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Costing</span></a>
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='purchase-order')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Order Purchase</span></a>
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='vendors')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Costing</span></a>
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='trend-analysis')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Trend analysis</span></a>
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='women-stitching-registration')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Women stitching registration record </span></a>
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='women-product-registration')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Women prepared products registration record</span></a>
+						</li>
+
+						dastarkhwan 
+						<li class="nav-label">Dastarkhwan 	</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url('dastarkhwan/'. $page='daily-expense-sheet')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily expense sheet </span></a>
+							<a class="nav-link" href="{{url('dastarkhwan/'. $page='costing')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily dastarkhwan record</span></a>
+							
 						</li>
 
 						<li class="nav-label">Settings </li>
