@@ -148,6 +148,20 @@ Route::group(['prefix' => 'dastarkhwan'], function () {
 
 });
 
+Route::group(['prefix' => 'community-empowerment'], function () {
+
+	Route::get('/poultry-registration-record/datatable', 'CommunityEmpowerment\PoultryRegistrationRecordController@datatable');
+	Route::resource('/poultry-registration-record', 'CommunityEmpowerment\PoultryRegistrationRecordController');
+
+});
+
+Route::group(['prefix' => 'task-assignment'], function () {
+
+	Route::get('/task-assignment/datatable', 'TaskAssignment\TaskAssignmentController@datatable');
+	Route::resource('/task-assignment', 'TaskAssignment\TaskAssignmentController');
+
+});
+
 
 
 // Chat

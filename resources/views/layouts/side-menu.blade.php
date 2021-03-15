@@ -91,11 +91,20 @@
 							<a class="nav-link" href="{{url('dhaaga-clothings/'. $page='women-product-registration')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Women prepared products registration record</span></a>
 						</li>
 
-						dastarkhwan 
+						 
 						<li class="nav-label">Dastarkhwan 	</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{url('dastarkhwan/'. $page='daily-expense-sheet')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily expense sheet </span></a>
 							<a class="nav-link" href="{{url('dastarkhwan/'. $page='daily-dastarkhwan-record')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily dastarkhwan record</span></a>
+							
+						</li>
+						<li class="nav-label"> Community Empowerment </li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url('community-empowerment/'. $page='poultry-registration-record')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Poultry registration record</span></a>
+						</li>
+						<li class="nav-label">Task Assignment form </li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url('task-assignment/'. $page='task-assignment')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Task Assignment</span></a>
 							
 						</li>
 
