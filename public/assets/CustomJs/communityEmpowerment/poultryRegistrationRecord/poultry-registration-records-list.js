@@ -28,8 +28,8 @@ $(document).ready(()=>{
             // console.log(row)
               return `
               <div class="glyph">
-                  <a href="/skincare/trend-analysis/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
-                  <a class="modal-effect" data-effect="effect-scale" data-toggle="modal" href="#" onclick="deleteTrndAnalysis('`+row.id+`')"> <i class="typcn typcn-trash"></i> </a>
+                  <a href="/community-empowerment/poultry-registration-record/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
+                  <a class="modal-effect" data-effect="effect-scale" data-toggle="modal" href="#" onclick="deleteRecord('`+row.id+`')"> <i class="typcn typcn-trash"></i> </a>
               </div>
 
 
@@ -62,11 +62,10 @@ $(document).ready(()=>{
     $('#deleteData').on('submit' , function(event){
       event.preventDefault();
       var data = $("#deleteData").serialize();
-      $trendId = $("#trendId").val();
-      console.log($trendId)
+      $id = $("#id").val();
 
          $.ajax({
-          url: '/community-empowerment/poultry-registration-record/'+$trendId,
+          url: '/community-empowerment/poultry-registration-record/'+$id,
           type: 'DELETE',
           data: data,
           processData: false,
@@ -86,7 +85,6 @@ $(document).ready(()=>{
           error: (errorResponse)=>{
               $.notify( errorResponse, 'error'  );
 
-
           }
       })
 
@@ -96,7 +94,7 @@ $(document).ready(()=>{
 
   });
 
-  function deleteTrndAnalysis(id) {
+  function deleteRecord(id) {
     $("#deleteModel").modal('show');
-    $("#trendId").val(id);
+    $("#id").val(id);
   }

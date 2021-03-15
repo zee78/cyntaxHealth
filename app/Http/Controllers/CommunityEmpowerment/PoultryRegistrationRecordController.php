@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CommunityEmpowerment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePoultryRegistrationRecord;
+use App\Http\Requests\UpdatePoultryRegistrationRecord;
 use App\Models\PoultryRegistrationRecord;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,7 +84,9 @@ class PoultryRegistrationRecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = PoultryRegistrationRecord::find($id);
+        return \View::make('communityEmpowerment.poultryRegistrationRecord.poultry-registration-record-edit' , compact('data'));
+        
     }
 
     /**
@@ -93,9 +96,29 @@ class PoultryRegistrationRecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePoultryRegistrationRecord $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $poultryRegistrationRecordModel =  PoultryRegistrationRecord::find($id);
+
+        $poultryRegistrationRecordModel->name = $validatedData['name'];
+        $poultryRegistrationRecordModel->cnic = $validatedData['cnic'];
+        $poultryRegistrationRecordModel->contact_number = $validatedData['phoneNo'];
+        $poultryRegistrationRecordModel->enrolment_date = $validatedData['enrolment_date'];
+        $poultryRegistrationRecordModel->number_of_poultry_given = $validatedData['number_of_poultry_given'];
+        $poultryRegistrationRecordModel->amount = $validatedData['amount_status'];
+        $poultryRegistrationRecordModel->address = $validatedData['address'];
+
+        $poultryRegistrationRecordModel->status = '1';
+        $poultryRegistrationRecordModel->created_by = Auth::id();
+
+
+         if ($poultryRegistrationRecordModel->save()) {
+            return response()->json(['status'=>'true' , 'message' => 'data updated successfully'] , 200);
+        }else{
+             return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -106,7 +129,14 @@ class PoultryRegistrationRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteData = PoultryRegistrationRecord::find($id);
+        if($deleteData->delete()){
+            return response()->json(['status'=>'true' , 'message' => ' data deleted successfully'] , 200);
+
+        }else{
+            return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+        }
     }
     public function datatable()
     {

@@ -87,7 +87,7 @@
 						<form id="deleteData" > 
 							@csrf
 							 @method('DELETE')
-						<input type="hidden" name="trendId" id="trendId">
+						<input type="hidden" name="id" id="id">
 						<div class="modal-body">
 							<h6></h6>
 							<p>are you sure you want to delete the record ?</p>
