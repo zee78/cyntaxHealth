@@ -21,13 +21,13 @@ $(document).ready(()=>{
            { data: "address" },
            { data: "cnic" },
            { data: "phone_no" },
-           { data: "Speciality" },
+           { data: "speciality" },
            { data: "enrolment_date" },
            { render : function(data, type, row , full) {
             // console.log(row)
               return `
               <div class="glyph">
-                  <a href="/skincare/trend-analysis/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
+                  <a href="/dhaaga-clothings/women-stitching-registration/`+row.id+`/edit"> <i class="typcn typcn-edit"></i> </a>
                   <a class="modal-effect" data-effect="effect-scale" data-toggle="modal" href="#" onclick="deleteTrndAnalysis('`+row.id+`')"> <i class="typcn typcn-trash"></i> </a>
               </div>
 
@@ -59,9 +59,9 @@ $(document).ready(()=>{
 
       });
       // **************************** hide and display user data ***********************
-      if (typeof role === 'undefined') {
-        table.columns(5).visible(false);
-      }
+      // if (typeof role === 'undefined') {
+      //   table.columns(5).visible(false);
+      // }
       // *******************************************************************************
 
     // ******************** ******************************* confirm delete ajax **********************
@@ -70,11 +70,11 @@ $(document).ready(()=>{
     $('#deleteData').on('submit' , function(event){
       event.preventDefault();
       var data = $("#deleteData").serialize();
-      $trendId = $("#trendId").val();
+      $trendId = $("#stitchId").val();
       console.log($trendId)
 
          $.ajax({
-          url: '/skincare/trend-analysis/'+$trendId,
+          url: '/dhaaga-clothings/women-stitching-registration/'+$trendId,
           type: 'DELETE',
           data: data,
           processData: false,
@@ -84,7 +84,7 @@ $(document).ready(()=>{
               if (response.status == 'true') {
 
                   $.notify(response.message , 'success'  );
-                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/skincare/trend-analysis";
+                  window.location.href = window.location.protocol + '//' + window.location.hostname +":"+window.location.port+"/dhaaga-clothings/women-stitching-registration";
 
               }else{
                   $.notify(response.message , 'error');
@@ -106,5 +106,5 @@ $(document).ready(()=>{
 
   function deleteTrndAnalysis(id) {
     $("#deleteModel").modal('show');
-    $("#trendId").val(id);
+    $("#stitchId").val(id);
   }

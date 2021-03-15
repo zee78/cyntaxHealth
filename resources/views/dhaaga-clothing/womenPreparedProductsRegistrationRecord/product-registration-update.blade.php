@@ -19,7 +19,6 @@
 			<li class="breadcrumb-item active" aria-current="page">Create Product Registration</li>
 		</ol>
 	</div>
-
 </div>
 <!-- End Page Header -->
 @endsection
@@ -31,70 +30,61 @@
 			<div class="card-body">
 				<div>
 					<h6 class="card-title mb-1">Add Product Registration</h6>
-
 				</div>
 				<div class="mt-3 mb-3">
-					<form  id="formProductRecordCreate">
+					<form  id="formProductRecordUpdate">
 						@csrf
 						<div class="">
 							<div class="row">
-                                <div class="col-lg-6 col-md-6">
-								<div class="form-group">
-									<label class="form-label">Name: <span class="tx-danger">*</span></label>
-									<input type="text" name="name" class="form-control" placeholder="Name">
-                                </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-
-								<div class="form-group">
-									<label class="form-label">Cnic: <span class="tx-danger">*</span></label>
-									<input type="text" name="cnic" class="form-control" placeholder="Cnic">
-                                </div>
-                                </div>
-
+								<input type="hidden" name="productId" id="productId" value="{{$getSingleData->id}}">
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label class="form-label">Name: <span class="tx-danger">*</span></label>
+										<input type="text" name="name" value="{{$getSingleData->name}}" class="form-control" placeholder="Name">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label class="form-label">Cnic: <span class="tx-danger">*</span></label>
+										<input type="text" name="cnic" value="{{$getSingleData->cnic}}" class="form-control" placeholder="CNIC">
+									</div>
+								</div>
 							</div>
 							<div class="row">
-                                <div class="col-lg-6 col-md-6">
-
-								<div class="form-group">
-									<label class="form-label">Contact Detail: <span class="tx-danger">*</span></label>
-									<input class="form-control" name="phoneNo" placeholder="Contact Detail" required="" type="text">
-                                </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6">
-
-                                    <div class="form-group">
-                                        <label class="form-label">Specility: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" name="specility" placeholder="Specility" required="" type="text">
-                                    </div>
-                                    </div>
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label class="form-label">Contact Detail: <span class="tx-danger">*</span></label>
+										<input class="form-control" name="phoneNo" value="{{$getSingleData->phone_no}}" placeholder="Phone" required="" type="text">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label class="form-label">Specility: <span class="tx-danger">*</span></label>
+										<input class="form-control" name="specility" value="{{$getSingleData->speciality}}" placeholder="Specility" required="" type="text">
+									</div>
+								</div>
 							</div>
-                            <div class="row">
+							<div class="row">
 								
 								<div class="col-md-6 col-lg-6">
-
-								<div class="form-group">
-									<label class="form-label">Enrolment Date: <span class="tx-danger">*</span></label>
-									<input class="form-control fc-datepicker" name="enrolmentDate" placeholder="MM/DD/YYYY" required="" type="text">
+									<div class="form-group">
+										<label class="form-label">Enrolment Date: <span class="tx-danger">*</span></label>
+										<input class="form-control fc-datepicker" name="enrolmentDate" value="{{$getSingleData->enrolment_date}}" placeholder="MM/DD/YYYY" required="" type="text">
+									</div>
 								</div>
-							    </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
-
-								<div class="form-group">
-									<label class="form-label">Address: <span class="tx-danger">*</span></label>
-									<input class="form-control" name="address" placeholder="Address" required="" type="text">
-                                </div>
-                                </div>
-
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-md-12">
+									<div class="form-group">
+										<label class="form-label">Address: <span class="tx-danger">*</span></label>
+										<input class="form-control" name="address" placeholder="Address" required="" type="text"  value="{{$getSingleData->address}}">
+									</div>
+								</div>
 							</div>
 							<button class="btn ripple btn-primary pd-x-20" type="submit">Submit Product</button>
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -117,6 +107,5 @@
 <!-- Jquery-Ui js-->
 <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <!-- ********************** custom js file here *********************** -->
-<script src="{{ URL::asset('assets/CustomJs/DhaagaClothings/womenPreparedProductsRegistrationRecord/product-registration-create.js')}}"></script>
-
+<script src="{{ URL::asset('assets/CustomJs/DhaagaClothings/womenPreparedProductsRegistrationRecord/product-registration-update.js')}}"></script>
 @endsection

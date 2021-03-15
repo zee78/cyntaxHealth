@@ -11,7 +11,7 @@
 					<!-- Page Header -->
 					<div class="page-header">
 						<div>
-							<h2 class="main-content-title tx-24 mg-b-5">Trend Analysis</h2>
+							<h2 class="main-content-title tx-24 mg-b-5">Product Registration</h2>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">List</li>
@@ -48,7 +48,7 @@
 										<!-- <p class="text-muted card-sub-title">Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.</p> -->
 									</div>
 									<div class="table-responsive">
-										<table class="table" id="tblProduct">
+										<table class="table" id="tblProductData">
 											<thead>
 												<tr>
 													<th class="wd-20p">Sr#</th>
@@ -86,7 +86,7 @@
 						<form id="deleteData" > 
 							@csrf
 							 @method('DELETE')
-						<input type="hidden" name="trendId" id="trendId">
+						<input type="hidden" name="productId" id="productId">
 						<div class="modal-body">
 							<h6></h6>
 							<p>are you sure you want to delete the record ?</p>

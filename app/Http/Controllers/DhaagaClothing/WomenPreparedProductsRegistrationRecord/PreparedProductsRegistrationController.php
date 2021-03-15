@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\WomenPreparedProductsRegistrationR
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingProductRegistartion;
+use App\Http\Requests\UpdateDhaagaClothingProductRegistartion;
 use App\Models\DhaagaClothingProductRegistration;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,7 @@ class PreparedProductsRegistrationController extends Controller
         $validatedData = $request->validated();
 
         $dhaagaClothingsStitchingRegistrationModel = new DhaagaClothingProductRegistration();
-
+        // dd($request->all());
         $dhaagaClothingsStitchingRegistrationModel->name = $validatedData['name'];
         $dhaagaClothingsStitchingRegistrationModel->cnic = $validatedData['cnic'];
         $dhaagaClothingsStitchingRegistrationModel->phone_no = $validatedData['phoneNo'];
@@ -81,7 +82,10 @@ class PreparedProductsRegistrationController extends Controller
      */
     public function edit($id)
     {
-        //
+      $getSingleData = DhaagaClothingProductRegistration::find($id);
+        // return $getSingleData->id;
+
+      return \View::make('dhaaga-clothing.womenPreparedProductsRegistrationRecord.product-registration-update' , compact('getSingleData'));
     }
 
     /**
@@ -91,9 +95,28 @@ class PreparedProductsRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingProductRegistartion $request, $id)
     {
-        //
+      $validatedData = $request->validated();
+
+      $findData = DhaagaClothingProductRegistration::find($id);
+
+      $findData->name = $validatedData['name'];
+      $findData->cnic = $validatedData['cnic'];
+      $findData->phone_no = $validatedData['phoneNo'];
+      $findData->speciality = $validatedData['specility'];
+      $findData->address = $validatedData['address'];
+      $findData->enrolment_date = $request->enrolmentDate;
+
+      $findData->status = '1';
+      $findData->created_by = Auth::id();
+
+
+       if ($findData->save()) {
+          return response()->json(['status'=>'true' , 'message' => ' data updated successfully'] , 200);
+      }else{
+           return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+      }
     }
 
     /**
@@ -104,7 +127,14 @@ class PreparedProductsRegistrationController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingProductRegistration::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'Data deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 
     public function datatable()

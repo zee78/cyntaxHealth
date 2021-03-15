@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dastarkhwan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDailyExpenseSheet;
+use App\Http\Requests\UpdateDailyExpenseSheet;
 use App\Models\DailyExpenseSheet;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,7 +79,10 @@ class DailyExpenseSheetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $getSingleData = DailyExpenseSheet::find($id);
+        // return $getSingleData->id;
+
+        return \View::make('dastarkhwan.daily-expense-sheet.daily-expense-sheet-update' , compact('getSingleData'));
     }
 
     /**
@@ -88,9 +92,26 @@ class DailyExpenseSheetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDailyExpenseSheet $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+
+        $findData = DailyExpenseSheet::find($id);
+
+        $findData->date = $validatedData['date'];
+        $findData->total_cost = $validatedData['total_cost'];
+        $findData->name_of_items_purchased = $validatedData['name_of_items_purchased'];
+        $findData->purchased_by = $validatedData['purchased_by'];
+
+        $findData->status = '1';
+        $findData->created_by = Auth::id();
+
+
+         if ($findData->save()) {
+            return response()->json(['status'=>'true' , 'message' => 'data updated successfully'] , 200);
+        }else{
+             return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -101,7 +122,14 @@ class DailyExpenseSheetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteData = DailyExpenseSheet::find($id);
+        if($deleteData->delete()){
+            return response()->json(['status'=>'true' , 'message' => 'Data deleted successfully'] , 200);
+
+        }else{
+            return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+        }
     }
 
     public function datatable()

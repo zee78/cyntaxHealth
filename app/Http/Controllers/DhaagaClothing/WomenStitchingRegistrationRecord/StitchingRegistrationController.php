@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DhaagaClothing\WomenStitchingRegistrationRecord;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDhaagaClothingStitchingRegistration;
+use App\Http\Requests\UpdateDhaagaClothingStitchingRegistration;
 use App\Models\DhaagaClothingStitchingRegistration;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,7 +84,10 @@ class StitchingRegistrationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $getSingleData = DhaagaClothingStitchingRegistration::find($id);
+        // return $getSingleData->id;
+
+        return \View::make('dhaaga-clothing.womenStitchingRegistrationRecord.stitching-registration-update' , compact('getSingleData'));
     }
 
     /**
@@ -93,9 +97,28 @@ class StitchingRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDhaagaClothingStitchingRegistration $request, $id)
     {
-        //
+        $validatedData = $request->validated();
+        
+        $findData = DhaagaClothingStitchingRegistration::find($id);
+
+        $findData->name = $validatedData['name'];
+        $findData->cnic = $validatedData['cnic'];
+        $findData->phone_no = $validatedData['phoneNo'];
+        $findData->speciality = $validatedData['specility'];
+        $findData->address = $validatedData['address'];
+        $findData->enrolment_date = $request->enrolmentDate;
+
+        $findData->status = '1';
+        $findData->created_by = Auth::id();
+
+
+         if ($findData->save()) {
+            return response()->json(['status'=>'true' , 'message' => ' data updated successfully'] , 200);
+        }else{
+             return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
+        }
     }
 
     /**
@@ -106,7 +129,14 @@ class StitchingRegistrationController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $deleteData = DhaagaClothingStitchingRegistration::find($id);
+      if($deleteData->delete()){
+          return response()->json(['status'=>'true' , 'message' => 'Cloth stitching data deleted successfully'] , 200);
+
+      }else{
+          return response()->json(['status'=>'error' , 'message' => 'error occured please try again'] , 200);
+
+      }
     }
 
     public function datatable()
