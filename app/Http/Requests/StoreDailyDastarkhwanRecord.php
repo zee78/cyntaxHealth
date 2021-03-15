@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDailyExpenseSheet extends FormRequest
+class StoreDailyDastarkhwanRecord extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,11 @@ class StoreDailyExpenseSheet extends FormRequest
     {
         return [
             'date' => 'required',
-            'total_cost' => 'required|numeric',
-            'name_of_items_purchased' => 'required',
-            'purchased_by' => 'required',
+            'location' => 'required',
+            'name_of_items_distributed' => 'required',
+            'timing' => 'required',
+            'number_of_people' => 'required',
+            'amount_collected' => 'required',
         ];
     }
 }

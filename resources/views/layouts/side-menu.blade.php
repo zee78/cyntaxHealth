@@ -95,7 +95,7 @@
 						<li class="nav-label">Dastarkhwan 	</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{url('dastarkhwan/'. $page='daily-expense-sheet')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily expense sheet </span></a>
-							<a class="nav-link" href="{{url('dastarkhwan/'. $page='costing')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily dastarkhwan record</span></a>
+							<a class="nav-link" href="{{url('dastarkhwan/'. $page='daily-dastarkhwan-record')}}"><i class="fe fe-compass"></i><span class="sidemenu-label">Daily dastarkhwan record</span></a>
 							
 						</li>
 

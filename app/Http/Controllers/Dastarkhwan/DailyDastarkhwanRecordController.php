@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Dastarkhwan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreDailyExpenseSheet;
-use App\Models\DailyExpenseSheet;
+use App\Http\Requests\StoreDailyDastarkhwanRecord;
+use App\Models\DailyDastarkhwanRecord;
 use Illuminate\Support\Facades\Auth;
 
-
-class DailyExpenseSheetController extends Controller
+class DailyDastarkhwanRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,7 @@ class DailyExpenseSheetController extends Controller
      */
     public function index()
     {
-        return \View::make('dastarkhwan.daily-expense-sheet.daily-expense-sheets-list');
+        return \View::make('dastarkhwan.daily-dastarkhwan-record.daily-dastarkhwan-records-list');
     }
 
     /**
@@ -28,7 +27,7 @@ class DailyExpenseSheetController extends Controller
      */
     public function create()
     {
-        return \View::make('dastarkhwan.daily-expense-sheet.daily-expense-sheet-create');
+        return \View::make('dastarkhwan.daily-dastarkhwan-record.daily-dastarkhwan-record-create');
     }
 
     /**
@@ -37,22 +36,24 @@ class DailyExpenseSheetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDailyExpenseSheet $request)
+    public function store(StoreDailyDastarkhwanRecord $request)
     {
         $validatedData = $request->validated();
 
-        $dailyExpenseSheetModel = new DailyExpenseSheet();
+        $dailyDasterKhwanModel = new DailyDastarkhwanRecord();
 
-        $dailyExpenseSheetModel->date = $validatedData['date'];
-        $dailyExpenseSheetModel->total_cost = $validatedData['total_cost'];
-        $dailyExpenseSheetModel->name_of_items_purchased = $validatedData['name_of_items_purchased'];
-        $dailyExpenseSheetModel->purchased_by = $validatedData['purchased_by'];
+        $dailyDasterKhwanModel->date = $validatedData['date'];
+        $dailyDasterKhwanModel->location = $validatedData['location'];
+        $dailyDasterKhwanModel->timing = $validatedData['timing'];
+        $dailyDasterKhwanModel->name_of_item_distributed = $validatedData['name_of_items_distributed'];
+        $dailyDasterKhwanModel->number_of_people = $validatedData['number_of_people'];
+        $dailyDasterKhwanModel->amount_collected = $validatedData['amount_collected'];
 
-        $dailyExpenseSheetModel->status = '1';
-        $dailyExpenseSheetModel->created_by = Auth::id();
+        $dailyDasterKhwanModel->status = '1';
+        $dailyDasterKhwanModel->created_by = Auth::id();
 
 
-         if ($dailyExpenseSheetModel->save()) {
+         if ($dailyDasterKhwanModel->save()) {
             return response()->json(['status'=>'true' , 'message' => 'data add successfully'] , 200);
         }else{
              return response()->json(['status'=>'errorr' , 'message' => 'error occured please try again'] , 200);
@@ -103,9 +104,8 @@ class DailyExpenseSheetController extends Controller
     {
         //
     }
-
     public function datatable()
     {
-        return response()->json(DailyExpenseSheet::all(), 200);
+        return response()->json(DailyDastarkhwanRecord::all(), 200);
     }
 }

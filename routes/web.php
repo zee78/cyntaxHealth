@@ -140,8 +140,11 @@ Route::group(['prefix' => 'dhaaga-clothings'], function () {
 
 Route::group(['prefix' => 'dastarkhwan'], function () {
 
-	Route::get('/daily-expense-sheet/datatable', 'Dastarkhwan\DailyExpenseSheetControllerr@datatable');
-	Route::resource('/daily-expense-sheet', 'DhaagaClothing\DailyExpenseSheetControllerr');
+	Route::get('/daily-expense-sheet/datatable', 'Dastarkhwan\DailyExpenseSheetController@datatable');
+	Route::resource('/daily-expense-sheet', 'Dastarkhwan\DailyExpenseSheetController');
+
+	Route::get('/daily-dastarkhwan-record/datatable', 'Dastarkhwan\DailyDastarkhwanRecordController@datatable');
+	Route::resource('/daily-dastarkhwan-record', 'Dastarkhwan\DailyDastarkhwanRecordController');
 
 });
 
